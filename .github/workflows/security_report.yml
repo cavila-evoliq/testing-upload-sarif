@@ -7,8 +7,8 @@ jobs:
   create_report:
     name: Security Scan PDF Report
     runs-on: ubuntu-latest
-    permissions:
-      security-events: read
+    # permissions:
+    #   security-events: read
 
     steps:
       - name: Run tfsec
