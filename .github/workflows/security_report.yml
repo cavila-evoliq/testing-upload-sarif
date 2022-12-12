@@ -7,8 +7,7 @@ jobs:
   create_report:
     name: Security Scan PDF Report
     runs-on: ubuntu-latest
-    # permissions:
-    #   security-events: read
+    permissions: write-all
 
     steps:
       - name: Run tfsec
@@ -16,6 +15,12 @@ jobs:
         with:
           sarif_file: tfsec.sarif
           full_repo_scan: true
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: tfsec.sarif
+          path: ${{ github.workspace }}/tfsec.sarif
 
       - name: GitHub Security Report Action
         uses: peter-murray/github-security-report-action@v2
